@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:id="@+id/currencyLayout">
+        <TextView
+            android:text="Денег в казне: "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/currency"
+            android:gravity="center"
+            android:textAlignment="center" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <Button
+                android:text="Снять деньги"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/getMoney" />
+            <Button
+                android:text="Обнулить счет"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/refreshMoney" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:id="@+id/incomeLayout">
+        <TextView
+            android:text="Уровень доходов:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/incomeRate"
+            android:gravity="center_horizontal"
+            android:textAlignment="center" />
+    </LinearLayout>
+</LinearLayout>
