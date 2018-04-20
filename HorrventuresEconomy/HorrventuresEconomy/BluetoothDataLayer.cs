@@ -21,6 +21,7 @@ namespace HorrventuresEconomy
         private Plugin.BLE.Abstractions.Contracts.IAdapter adapter;
         private List<MyDeviceView> deviceList;
 
+
         public BluetoothDataLayer()
         {
             timer = new Timer

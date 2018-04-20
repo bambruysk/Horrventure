@@ -19,6 +19,9 @@ namespace HorrventuresEconomy
         public int Countdown;
         public object nativeDevice;
 
+        public enum eDevType {FORGE, ALCHEMY, JEWELRY, PALACE, ARTIFACT}
+
+
         public MyDeviceView(IDevice device)
         {
             id = device.Id;

@@ -60,6 +60,9 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beacon.cs" />
+    <Compile Include="BeaconFiltercs.cs" />
+    <Compile Include="BeaconType.cs" />
     <Compile Include="BluetoothDataLayer.cs" />
     <Compile Include="GetMoneyActivity.cs" />
     <Compile Include="EconomyLogic.cs" />
@@ -91,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BeaconList.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
