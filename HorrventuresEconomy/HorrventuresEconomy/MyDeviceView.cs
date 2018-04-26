@@ -17,16 +17,18 @@ namespace HorrventuresEconomy
     {
         public Guid id { get; }
         public int Countdown;
-        public object nativeDevice;
 
-        public enum eDevType {FORGE, ALCHEMY, JEWELRY, PALACE, ARTIFACT}
+        public int RSSI;
+
+//        public enum eDevType {FORGE, ALCHEMY, JEWELRY, PALACE, ARTIFACT}
 
 
         public MyDeviceView(IDevice device)
         {
             id = device.Id;
             Countdown = 5;
-            object nativeDevice = device.NativeDevice;
+            RSSI = device.Rssi;
+
         }
 
         public void UpdateCountdown()

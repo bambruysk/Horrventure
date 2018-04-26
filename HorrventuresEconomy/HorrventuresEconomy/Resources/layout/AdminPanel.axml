@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Изменить пароль региональщика"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewChangePswd" />
+    <EditText
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextChangeRegPswd"
+        android:layout_marginRight="0.0dp" />
+    <Button
+        android:text="Установить новый пароль"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChangeRegPasswd"
+        android:layout_marginBottom="0.0dp" />
+    <Button
+        android:text="Добавить новые устройства"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/adminPanelButtonAddNewDevices"
+        android:layout_marginBottom="0.0dp" />
+    <Button
+        android:text="Вернуться"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/adminPanelFinish"
+        android:layout_marginBottom="0.0dp" />
+</LinearLayout>

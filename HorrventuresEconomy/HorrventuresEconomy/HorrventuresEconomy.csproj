@@ -33,6 +33,9 @@
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -60,24 +63,45 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessManager.cs" />
+    <Compile Include="AddNewDeviceActivity.cs" />
+    <Compile Include="BeaconDB.cs" />
+    <Compile Include="FindNewDevice.cs" />
     <Compile Include="Beacon.cs" />
-    <Compile Include="BeaconFiltercs.cs" />
+    <Compile Include="BeaconFilter.cs" />
     <Compile Include="BeaconType.cs" />
     <Compile Include="BluetoothDataLayer.cs" />
     <Compile Include="GetMoneyActivity.cs" />
     <Compile Include="EconomyLogic.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyBleDevice.cs" />
     <Compile Include="MyDeviceView.cs" />
+    <Compile Include="AdminPanelActivity.cs" />
+    <Compile Include="PasswordChangeEventArgs.cs" />
+    <Compile Include="ReqPassDialogFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScannedDeviceView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\FindDevicesLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GetPassDialogLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\GetMoney.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AdminPanel.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AddDevice.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -96,7 +120,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BeaconList.xml" />
+    <Content Include="Resources\layout\BeaconList.xml" />
+    <Content Include="menu1.xml" />
+    <AndroidResource Include="Resources\values\values.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

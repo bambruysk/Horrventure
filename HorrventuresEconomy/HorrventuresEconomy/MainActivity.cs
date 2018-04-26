@@ -4,9 +4,10 @@ using Android.OS;
 using Android.Content;
 using System.Timers;
 using System;
-
+using Android.OS.Storage;
 namespace HorrventuresEconomy
 {
+   
     [Activity(Label = "HorrventuresEconomy", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
@@ -14,12 +15,18 @@ namespace HorrventuresEconomy
         public TextView currency;
         LinearLayout currencyLayout;
         EconomyLogic logic;
+        
+        AccessManager acces;
+
+        
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Main);
+
+            acces = new AccessManager(this);
 
             currency = FindViewById<TextView>(Resource.Id.currency);
             currencyLayout = FindViewById<LinearLayout>(Resource.Id.currencyLayout);
@@ -44,6 +51,7 @@ namespace HorrventuresEconomy
             {
                 logic = new EconomyLogic();
             }
+            
         }
 
         public override Java.Lang.Object OnRetainNonConfigurationInstance()

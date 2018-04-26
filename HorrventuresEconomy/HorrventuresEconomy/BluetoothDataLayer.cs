@@ -21,6 +21,8 @@ namespace HorrventuresEconomy
         private Plugin.BLE.Abstractions.Contracts.IAdapter adapter;
         private List<MyDeviceView> deviceList;
 
+        public int MinRssi;
+
 
         public BluetoothDataLayer()
         {
@@ -35,14 +37,19 @@ namespace HorrventuresEconomy
             adapter = ble.Adapter;
             deviceList = new List<MyDeviceView>();
 
+            MinRssi = -100;
+
             adapter.DeviceDiscovered += (s, a) =>
             {
-                if (a.Device.Name.Contains("Beacon"))
+                if (a.Device.Rssi >= MinRssi)
                 {
                     if (deviceList.Exists(d => d.id == a.Device.Id))
                     {
+
                         var dev = deviceList.Find(d => d.id == a.Device.Id);
                         dev.UpdateCountdown();
+                        dev.RSSI = a.Device.Rssi;
+
                     }
                     else
                     {
