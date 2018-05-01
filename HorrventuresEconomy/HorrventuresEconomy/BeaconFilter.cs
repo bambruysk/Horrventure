@@ -20,11 +20,11 @@ namespace HorrventuresEconomy
     {
         private BeaconDB beaconsDB;
 
-        private BluetoothDataLayer bluetooth = new BluetoothDataLayer();
+        private BluetoothDataLayer bluetooth;
 
         public BeaconFilter()
         {
-
+            bluetooth = new BluetoothDataLayer();
             beaconsDB = new BeaconDB();
 
         }

@@ -26,6 +26,7 @@ namespace HorrventuresEconomy
 
         public BluetoothDataLayer()
         {
+            Console.WriteLine("Идгуещщер ВфефДфнукЫефкеув");
             timer = new Timer
             {
                 Interval = 15000
@@ -41,6 +42,7 @@ namespace HorrventuresEconomy
 
             adapter.DeviceDiscovered += (s, a) =>
             {
+                Console.WriteLine("DeviceFound");
                 if (a.Device.Rssi >= MinRssi)
                 {
                     if (deviceList.Exists(d => d.id == a.Device.Id))

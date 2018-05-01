@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace HorrventuresEconomy.Resources.layout
+namespace HorrventuresEconomy
 {
 
 
@@ -22,19 +22,24 @@ namespace HorrventuresEconomy.Resources.layout
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            //RequestPassword request = new RequestPassword(this);
+            //if (!request.GetPassword(RequestPassword.SecurityLevel.ADMIN))
+            //{
+            //    Finish();
+            //}
 
             SetContentView(Resource.Layout.AdminPanel);
 
             RequestAdminPassword();
 
-            Button buttonChangePswd = FindViewById<Button>(Resource.Id.editTextChangeRegPswd);
+            Button buttonChangePswd = FindViewById<Button>(Resource.Id.buttonChangeRegPasswd);
             editTextChangePswd = FindViewById<EditText>(Resource.Id.editTextChangeRegPswd);
             buttonChangePswd.Click += ButtonChangePswd_Click;
 
             Button buttonAddNewDeices = FindViewById<Button>(Resource.Id.adminPanelButtonAddNewDevices);
             buttonAddNewDeices.Click += delegate
             {
-                Intent FindNewDevicesIntent = new Intent(this, typeof(FindNewDevice));
+                Intent FindNewDevicesIntent = new Intent(this, typeof(DeviceDbViewActivity));
                 StartActivity(FindNewDevicesIntent);
             };
 

@@ -13,54 +13,72 @@ using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Android;
+using System.Collections.ObjectModel;
 
 namespace HorrventuresEconomy
 {
     [Activity(Label = "Find New Device")]
-    public class FindNewDevice : Activity
+    public class FindNewDevice : ListActivity
 
 
 
     {
-         private List <MyBleDevice> deviceList;
+         private ObservableCollection <MyBleDevice> deviceList;
 
         private BeaconDB beaconDB;
 
         private IBluetoothLE ble;
         private Plugin.BLE.Abstractions.Contracts.IAdapter adapter;
-        private List<TableRow> tableRows;
-        private ArrayAdapter<MyBleDevice> arrayAdapter;
 
-        private ListView listViewDevices;
 
-        private MyBleDevice selectedBleDevice;
+
+
+    private MyBleDevice selectedBleDevice;
         protected override void OnCreate(Bundle savedInstanceState)
 
         {
             base.OnCreate(savedInstanceState);
             
-            SetContentView(Resource.Layout.FindDevicesLayout);
+            //SetContentView(Resource.Layout.FindDevicesLayout);
 
+           deviceList = new ObservableCollection <MyBleDevice>();
 
+            //for teset purpose
+            
             beaconDB = new BeaconDB();
 
             ble = CrossBluetoothLE.Current;
             adapter = ble.Adapter;
 
+            foreach (var dev in adapter.DiscoveredDevices)
+            {
+                deviceList.Add(new MyBleDevice((Device) dev));
+            }
+          
+
+
+            adapter.StartScanningForDevicesAsync();
             
-            listViewDevices = FindViewById<ListView>(Resource.Id.FindDeviceListView);
-            arrayAdapter = new ArrayAdapter<MyBleDevice>(this, Resource.Id.FindDeviceListView, deviceList);
+            
+            //ListView = FindViewById<ListView>(Resource.Id.FindDeviceListView);
+            //ListAdapter = new ScannedDeviceAdapter(this ,deviceList);
+            ListAdapter = new ArrayAdapter<MyBleDevice>(this,
+                Resource.Layout.FindDevicesLayout,Resource.Id.foundDeviceView, deviceList);
+            
+            ///Button startScanButton = FindViewById<Button>(Resource.Id.ButtonScanNewDevice);
+            
+            //ListView.AddFooterView(startScanButton);
+           // ListView.LongClick += StartScan;
 
-            Button startScanButton = FindViewById<Button>(Resource.Id.ButtonScanNewDevice);
-
-            listViewDevices.AddFooterView(startScanButton);
-
-            startScanButton.Click += StartScan;
+            ///startScanButton.Click 
 
             adapter.ScanTimeoutElapsed += ScanIsDone;
 
             adapter.DeviceDiscovered += AddViewDevice;
-            listViewDevices.ItemClick += AddNewDevice;
+            ListView.ItemClick += AddNewDevice;
+            
+            ((ArrayAdapter<MyBleDevice>)ListAdapter).SetNotifyOnChange(true);
+
 
         }
 
@@ -83,6 +101,13 @@ namespace HorrventuresEconomy
         private void AddViewDevice(object sender, DeviceEventArgs e)
         {
             deviceList.Add(new MyBleDevice((Device)e.Device));
+            Toast.MakeText(this, 
+                ("Найдено устройство" + (new MyBleDevice((Device)e.Device).ToString())),
+               ToastLength.Short).Show();
+
+            ((ArrayAdapter<MyBleDevice>)ListAdapter).NotifyDataSetChanged();
+            
+
         }
 
         private void ScanIsDone(object sender, EventArgs e)
@@ -103,6 +128,9 @@ namespace HorrventuresEconomy
             {
                 deviceList.Add(new MyBleDevice((Device)dev));
             }
+            Toast.MakeText(this, "Сканирование завершено", ToastLength.Short).Show();
+            // PIZDEZ
+            //  ListAdapter = new ArrayAdapter<MyBleDevice>(this,Resource.Layout.FindDevicesLayout, Resource.Id.foundDeviceView, deviceList);
 
         }
 

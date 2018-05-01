@@ -15,7 +15,7 @@ namespace HorrventuresEconomy
     [Activity(Label = "AddNewDeviceActivity")]
     public class AddNewDeviceActivity : Activity
     {
-        private Beacon Beacon;
+   //     private Beacon Beacon;
 
         public string Id;
         public double Mulltiplier;

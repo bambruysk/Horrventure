@@ -12,43 +12,57 @@ using Android.Views;
 using Android.Widget;
 using Plugin.BLE.Abstractions.Contracts;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace HorrventuresEconomy
 {
+    [Serializable]
     public class BeaconDB
     {
+        
         private Dictionary<string, Beacon> beacons_db;
-        private  string db_filename = "BeaconList.xml";
+        public  string db_filename = "BeaconList.xml";
 
+        private BinaryFormatter serializer;
 
+        private Beacon test_beacon;
 
-        private XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<string, Beacon>));
-
-        public string Db_filename { get => db_filename; set => db_filename = value; }
+        public Dictionary<string, Beacon> Beacons_db { get => beacons_db; }
 
         public BeaconDB()
         {
-            
-            if (File.Exists(db_filename))
+            string fileDir = Application.Context.FilesDir.Path;
+            db_filename = Path.Combine(fileDir, db_filename);
+            serializer = new BinaryFormatter();
+            beacons_db = new Dictionary<string, Beacon>();
+            if (File.Exists(path: db_filename))
             {
-                XmlReader reader = XmlReader.Create(db_filename);
-                XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<string, Beacon>));
-                beacons_db = (Dictionary<string, Beacon>) serializer.Deserialize(reader);
-                reader.Close();
+                using (Stream reader = new FileStream(db_filename, FileMode.Open))
+                {
+                    if (reader.IsDataAvailable())
+                        beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
+                    reader.Close();
+                }
             }
             else
             {
-                File.Create(db_filename);
-
-                beacons_db = new Dictionary<string, Beacon>();
-
+                using (FileStream fs = File.Create(db_filename, 1, FileOptions.RandomAccess))
+                {
+                    fs.Close();
+                }
+                
             }
-            
+            // Test purpose
+            test_beacon = new Beacon("test", 1, 1, Beacon.BeaconType.JEWELRY);
+            beacons_db.Add("test", test_beacon);
+            RegisterNewBeacon("01234", 1.0f, 0.1f, Beacon.BeaconType.ALCHEMY);
+            RegisterNewBeacon("5678", 2.0f, 0.3f, Beacon.BeaconType.PALACE);
 
         }
         private void SaveDB()
         {
 
-            XmlWriter writer = XmlWriter.Create(db_filename);
+            Stream writer = new FileStream(db_filename, FileMode.Open);
             serializer.Serialize(writer, beacons_db);
             writer.Close();
         }

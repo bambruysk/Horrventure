@@ -43,13 +43,156 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:id="@+id/incomeLayout">
+        android:id="@+id/cityLayout">
         <TextView
-            android:text="Уровень доходов:"
+            android:text="Состояние города"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/incomeRate"
+            android:id="@+id/cityState"
             android:gravity="center_horizontal"
             android:textAlignment="center" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/firstRowLayout">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Ювелирная мастерская"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/jewelry"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/jewelryImage"
+                    android:layout_weight="1" />
+                <TextView
+                    android:text="Уровень: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/jewelryLevel"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Алхимическая лаборатория"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alchemy"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/alchemyImage"
+                    android:layout_weight="1" />
+                <TextView
+                    android:text="Уровень: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alchemyLevel"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/secondRowLayout">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Кузница"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/smith"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/smithImage"
+                    android:layout_weight="1" />
+                <TextView
+                    android:text="Уровень: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/smithLevel"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Дворец"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/palace"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/palaceImage"
+                    android:layout_weight="1" />
+                <TextView
+                    android:text="Уровень: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/palaceLevel"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Библиотека"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/library"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/libraryImage"
+                    android:layout_weight="1" />
+                <TextView
+                    android:text="Уровень: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/libraryLevel"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

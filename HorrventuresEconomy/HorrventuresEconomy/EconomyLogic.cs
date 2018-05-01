@@ -17,25 +17,27 @@ namespace HorrventuresEconomy
         private double Currency;
         private Timer timer;
         public List<MyDeviceView> deviceList;
-        private BluetoothDataLayer deviceData;
+        //private BluetoothDataLayer deviceData;
         private const double BEACONCOSTPERTIME = 1;
 
-        private BeaconFilter beaconFilter = new BeaconFilter();
+        private BeaconFilter beaconFilter;
 
         public double currentIncome;
-
+        // Combine to struct/class/colloctions
         public int ForgeLevel;
         public int PalaceLevel;
         public int AlchemyLevel;
         public int JewelryLevel;
+        public int LibraryLevel;
 
 
 
 
         public EconomyLogic()
         {
+            beaconFilter = new BeaconFilter();
             deviceList = new List<MyDeviceView>();
-            deviceData = new BluetoothDataLayer();
+            //deviceData = new BluetoothDataLayer();
 
             timer = new Timer
             {
@@ -44,6 +46,26 @@ namespace HorrventuresEconomy
             timer.Elapsed += OnTimerTick;
             timer.Start();
         }
+        /// <summary>
+        /// Запуск экономики. Сбрасывает все в ноль.
+        /// </summary>
+        public void Start()
+        {
+            timer.Start();
+            RefreshCurrency();
+
+
+        }
+        public void Pause()
+        {
+            timer.Stop();
+        }
+
+        public void Resume()
+        {
+            timer.Start();
+        }
+
 
         private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
@@ -77,6 +99,9 @@ namespace HorrventuresEconomy
                     case Beacon.BeaconType.PALACE:
                         PalaceLevel++;
                         break;
+                    case Beacon.BeaconType.LIBRAY:
+                        LibraryLevel++;
+                        break;
                     default:
                         break;
                 }
@@ -89,7 +114,7 @@ namespace HorrventuresEconomy
 
         private void UpdateCurrency()
         {
-            deviceList = deviceData.GetDeviceList();
+            ///deviceList = deviceData.GetDeviceList();
             Currency += currentIncome;
         }
 
