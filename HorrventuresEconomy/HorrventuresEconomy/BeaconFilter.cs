@@ -18,25 +18,27 @@ namespace HorrventuresEconomy
 {
     public class BeaconFilter
     {
-        private BeaconDB beaconsDB;
+        
 
         private BluetoothDataLayer bluetooth;
 
-        public BeaconFilter()
+        public BeaconFilter(BluetoothDataLayer bluetooth)
         {
-            bluetooth = new BluetoothDataLayer();
-            beaconsDB = new BeaconDB();
+            this.bluetooth = bluetooth;
+            
 
         }
 
         public List<Beacon> GetActiveBeeacons()
         {
             List<Beacon> beacons = new List<Beacon>();
+
             List<MyDeviceView> devlist =  bluetooth.GetDeviceList();
+            BeaconDB.Upload();
             foreach (MyDeviceView device in devlist) {
-                if (beaconsDB.Contains(device.id.ToString()))
+                if (BeaconDB.Contains(device.id.ToString()))
                 {
-                    beacons.Add(beaconsDB.Get(device.id.ToString()));
+                    beacons.Add(BeaconDB.Get(device.id.ToString()));
                 }
             }
             return beacons;

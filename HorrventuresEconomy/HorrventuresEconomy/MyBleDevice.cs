@@ -23,21 +23,24 @@ namespace HorrventuresEconomy
 
         public MyBleDevice(Device device)
         {
-            Device = device;
+            this.Device = device;
         }
-
-
-
-
-
 
 
         public override string ToString()
         {
             string id_str = Device.Id.ToString();
             string id_chort_str = id_str.Substring(id_str.Length - 12);
-
-            return (id_chort_str + "   " + Device.Name.ToString());
+            string name_str;
+            if (this.Device.Name != null)
+            {
+                name_str = Device.Name.ToString();
+            }
+            else
+            {
+                name_str = "n/a";
+            }
+            return (id_chort_str + "   " + name_str);
         }
     }
 

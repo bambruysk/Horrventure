@@ -111,6 +111,7 @@ namespace HorrventuresEconomy
 
         private void StartAdminPanel(object sender, EventArgs e)
         {
+            logic.Pause();
             Intent intent = new Intent(this, typeof(AdminPanelActivity));
             StartActivity(intent);
         }

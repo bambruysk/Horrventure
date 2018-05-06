@@ -5,22 +5,29 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <ListView
+    <Button
+        android:text="Сохранить в базу"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DevDVSaveButton" />
+    <Button
+        android:text="Добавить устройства"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DevDBAddButton" />
+    <LinearLayout
+        android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/DevDBlistView"
-        android:clickable="true"
-        android:choiceMode="singleChoice" />
-    <Button
-        android:text="Поиск новых устройств"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/DevDBFindNewDevice" />
-    <TextView
-        android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/DevDBTextView" />
+        android:layout_height="wrap_content">
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/DevDBViewlistView"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:choiceMode="singleChoice" />
+    </LinearLayout>
 </LinearLayout>

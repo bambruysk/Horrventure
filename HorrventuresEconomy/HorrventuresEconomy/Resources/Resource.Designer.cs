@@ -75,146 +75,152 @@ namespace HorrventuresEconomy
 			// aapt resource value: 0x7f07000e
 			public const int ButtonScanNewDevice = 2131165198;
 			
-			// aapt resource value: 0x7f07000b
-			public const int DevDBFindNewDevice = 2131165195;
-			
 			// aapt resource value: 0x7f07000c
-			public const int DevDBTextView = 2131165196;
-			
-			// aapt resource value: 0x7f07000a
-			public const int DevDBlistView = 2131165194;
+			public const int DevDBAddButton = 2131165196;
 			
 			// aapt resource value: 0x7f07000d
-			public const int FindDeviceListView = 2131165197;
+			public const int DevDBViewlistView = 2131165197;
 			
-			// aapt resource value: 0x7f070013
-			public const int GetPassLayout = 2131165203;
+			// aapt resource value: 0x7f07000b
+			public const int DevDVSaveButton = 2131165195;
+			
+			// aapt resource value: 0x7f070010
+			public const int FindDeviceListView = 2131165200;
+			
+			// aapt resource value: 0x7f07000f
+			public const int FoundDeviceLinearLayout = 2131165199;
 			
 			// aapt resource value: 0x7f070015
-			public const int GetPassWord = 2131165205;
+			public const int GetPassLayout = 2131165205;
 			
-			// aapt resource value: 0x7f070004
-			public const int addDeviceButton = 2131165188;
+			// aapt resource value: 0x7f070017
+			public const int GetPassWord = 2131165207;
 			
-			// aapt resource value: 0x7f070003
-			public const int addDeviceIncomeEditText = 2131165187;
+			// aapt resource value: 0x7f070005
+			public const int addDeviceButton = 2131165189;
+			
+			// aapt resource value: 0x7f070002
+			public const int addDeviceIncomeEditText = 2131165186;
 			
 			// aapt resource value: 0x7f070000
 			public const int addDeviceLabeText = 2131165184;
 			
-			// aapt resource value: 0x7f070002
-			public const int addDeviceMultEditText = 2131165186;
-			
-			// aapt resource value: 0x7f070008
-			public const int adminPanelButtonAddNewDevices = 2131165192;
+			// aapt resource value: 0x7f070001
+			public const int addDeviceMultEditText = 2131165185;
 			
 			// aapt resource value: 0x7f070009
-			public const int adminPanelFinish = 2131165193;
+			public const int adminPanelButtonAddNewDevices = 2131165193;
 			
-			// aapt resource value: 0x7f070022
-			public const int alchemy = 2131165218;
-			
-			// aapt resource value: 0x7f070023
-			public const int alchemyImage = 2131165219;
+			// aapt resource value: 0x7f07000a
+			public const int adminPanelFinish = 2131165194;
 			
 			// aapt resource value: 0x7f070024
-			public const int alchemyLevel = 2131165220;
-			
-			// aapt resource value: 0x7f070007
-			public const int buttonChangeRegPasswd = 2131165191;
-			
-			// aapt resource value: 0x7f070012
-			public const int cancel = 2131165202;
-			
-			// aapt resource value: 0x7f07001c
-			public const int cityLayout = 2131165212;
-			
-			// aapt resource value: 0x7f07001d
-			public const int cityState = 2131165213;
-			
-			// aapt resource value: 0x7f070019
-			public const int currency = 2131165209;
-			
-			// aapt resource value: 0x7f070018
-			public const int currencyLayout = 2131165208;
-			
-			// aapt resource value: 0x7f070006
-			public const int editTextChangeRegPswd = 2131165190;
-			
-			// aapt resource value: 0x7f07001e
-			public const int firstRowLayout = 2131165214;
-			
-			// aapt resource value: 0x7f07000f
-			public const int foundDeviceView = 2131165199;
-			
-			// aapt resource value: 0x7f07001a
-			public const int getMoney = 2131165210;
-			
-			// aapt resource value: 0x7f070014
-			public const int getPassTitele = 2131165204;
-			
-			// aapt resource value: 0x7f07001f
-			public const int jewelry = 2131165215;
-			
-			// aapt resource value: 0x7f070020
-			public const int jewelryImage = 2131165216;
-			
-			// aapt resource value: 0x7f070021
-			public const int jewelryLevel = 2131165217;
-			
-			// aapt resource value: 0x7f070016
-			public const int label = 2131165206;
-			
-			// aapt resource value: 0x7f07002c
-			public const int library = 2131165228;
-			
-			// aapt resource value: 0x7f07002d
-			public const int libraryImage = 2131165229;
-			
-			// aapt resource value: 0x7f07002e
-			public const int libraryLevel = 2131165230;
-			
-			// aapt resource value: 0x7f070001
-			public const int listBeaconTypes = 2131165185;
-			
-			// aapt resource value: 0x7f070010
-			public const int moneyInput = 2131165200;
-			
-			// aapt resource value: 0x7f070029
-			public const int palace = 2131165225;
-			
-			// aapt resource value: 0x7f07002a
-			public const int palaceImage = 2131165226;
-			
-			// aapt resource value: 0x7f07002b
-			public const int palaceLevel = 2131165227;
-			
-			// aapt resource value: 0x7f070017
-			public const int passwordInput = 2131165207;
-			
-			// aapt resource value: 0x7f07001b
-			public const int refreshMoney = 2131165211;
+			public const int alchemy = 2131165220;
 			
 			// aapt resource value: 0x7f070025
-			public const int secondRowLayout = 2131165221;
-			
-			// aapt resource value: 0x7f07002f
-			public const int shareMenuItem = 2131165231;
+			public const int alchemyImage = 2131165221;
 			
 			// aapt resource value: 0x7f070026
-			public const int smith = 2131165222;
+			public const int alchemyLevel = 2131165222;
 			
-			// aapt resource value: 0x7f070027
-			public const int smithImage = 2131165223;
+			// aapt resource value: 0x7f070008
+			public const int buttonChangeRegPasswd = 2131165192;
 			
-			// aapt resource value: 0x7f070028
-			public const int smithLevel = 2131165224;
+			// aapt resource value: 0x7f070014
+			public const int cancel = 2131165204;
+			
+			// aapt resource value: 0x7f07001e
+			public const int cityLayout = 2131165214;
+			
+			// aapt resource value: 0x7f07001f
+			public const int cityState = 2131165215;
+			
+			// aapt resource value: 0x7f07001b
+			public const int currency = 2131165211;
+			
+			// aapt resource value: 0x7f07001a
+			public const int currencyLayout = 2131165210;
+			
+			// aapt resource value: 0x7f070007
+			public const int editTextChangeRegPswd = 2131165191;
+			
+			// aapt resource value: 0x7f070020
+			public const int firstRowLayout = 2131165216;
 			
 			// aapt resource value: 0x7f070011
-			public const int submit = 2131165201;
+			public const int foundDeviceView = 2131165201;
 			
-			// aapt resource value: 0x7f070005
-			public const int textViewChangePswd = 2131165189;
+			// aapt resource value: 0x7f07001c
+			public const int getMoney = 2131165212;
+			
+			// aapt resource value: 0x7f070016
+			public const int getPassTitele = 2131165206;
+			
+			// aapt resource value: 0x7f070021
+			public const int jewelry = 2131165217;
+			
+			// aapt resource value: 0x7f070022
+			public const int jewelryImage = 2131165218;
+			
+			// aapt resource value: 0x7f070023
+			public const int jewelryLevel = 2131165219;
+			
+			// aapt resource value: 0x7f070018
+			public const int label = 2131165208;
+			
+			// aapt resource value: 0x7f07002e
+			public const int library = 2131165230;
+			
+			// aapt resource value: 0x7f07002f
+			public const int libraryImage = 2131165231;
+			
+			// aapt resource value: 0x7f070030
+			public const int libraryLevel = 2131165232;
+			
+			// aapt resource value: 0x7f070004
+			public const int listBeaconTypes = 2131165188;
+			
+			// aapt resource value: 0x7f070003
+			public const int listBeaconTypesLinearLayout = 2131165187;
+			
+			// aapt resource value: 0x7f070012
+			public const int moneyInput = 2131165202;
+			
+			// aapt resource value: 0x7f07002b
+			public const int palace = 2131165227;
+			
+			// aapt resource value: 0x7f07002c
+			public const int palaceImage = 2131165228;
+			
+			// aapt resource value: 0x7f07002d
+			public const int palaceLevel = 2131165229;
+			
+			// aapt resource value: 0x7f070019
+			public const int passwordInput = 2131165209;
+			
+			// aapt resource value: 0x7f07001d
+			public const int refreshMoney = 2131165213;
+			
+			// aapt resource value: 0x7f070027
+			public const int secondRowLayout = 2131165223;
+			
+			// aapt resource value: 0x7f070031
+			public const int shareMenuItem = 2131165233;
+			
+			// aapt resource value: 0x7f070028
+			public const int smith = 2131165224;
+			
+			// aapt resource value: 0x7f070029
+			public const int smithImage = 2131165225;
+			
+			// aapt resource value: 0x7f07002a
+			public const int smithLevel = 2131165226;
+			
+			// aapt resource value: 0x7f070013
+			public const int submit = 2131165203;
+			
+			// aapt resource value: 0x7f070006
+			public const int textViewChangePswd = 2131165190;
 			
 			static Id()
 			{
@@ -301,17 +307,23 @@ namespace HorrventuresEconomy
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f050003
+			public const int Beacon_add_mode = 2131034115;
+			
+			// aapt resource value: 0x7f050002
+			public const int Beacon_edit_mode = 2131034114;
+			
 			// aapt resource value: 0x7f050001
 			public const int app_name = 2131034113;
 			
 			// aapt resource value: 0x7f050000
 			public const int hello = 2131034112;
 			
-			// aapt resource value: 0x7f050003
-			public const int изменитьПарольРегиональщика = 2131034115;
+			// aapt resource value: 0x7f050005
+			public const int изменитьПарольРегиональщика = 2131034117;
 			
-			// aapt resource value: 0x7f050002
-			public const int установитьНовыйПароль = 2131034114;
+			// aapt resource value: 0x7f050004
+			public const int установитьНовыйПароль = 2131034116;
 			
 			static String()
 			{

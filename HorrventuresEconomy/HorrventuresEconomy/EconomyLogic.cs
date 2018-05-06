@@ -21,6 +21,7 @@ namespace HorrventuresEconomy
         private const double BEACONCOSTPERTIME = 1;
 
         private BeaconFilter beaconFilter;
+        private BluetoothDataLayer bleDataLayer;
 
         public double currentIncome;
         // Combine to struct/class/colloctions
@@ -35,9 +36,11 @@ namespace HorrventuresEconomy
 
         public EconomyLogic()
         {
-            beaconFilter = new BeaconFilter();
+            // Так надо, я все потом перепишу
+            bleDataLayer = new BluetoothDataLayer();
+            beaconFilter = new BeaconFilter(bleDataLayer);
             deviceList = new List<MyDeviceView>();
-            //deviceData = new BluetoothDataLayer();
+            
 
             timer = new Timer
             {
@@ -59,6 +62,8 @@ namespace HorrventuresEconomy
         public void Pause()
         {
             timer.Stop();
+            bleDataLayer.StopScan();
+
         }
 
         public void Resume()

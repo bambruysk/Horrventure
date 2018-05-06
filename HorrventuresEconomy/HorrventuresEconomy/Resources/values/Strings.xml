@@ -2,4 +2,6 @@
 <resources>
   <string name="hello">Hello World, Click Me!</string>
   <string name="app_name">HorrventuresEconomy</string>
+  <string name="Beacon_edit_mode">Редактировать маяк</string>
+  <string name="Beacon_add_mode">Добавить маяк </string>
 </resources>

@@ -5,43 +5,41 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <TextView
-    android:id="@+id/addDeviceLabeText"
-    android:text=""
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    />
-  <ListView
-    android:id="@+id/listBeaconTypes"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:choiceMode="singleChoice"
-    />
-  <EditText
-    android:id="@+id/addDeviceMultEditText"
-    android:text="1.0"
-    android:numeric="decimal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:autoText="true"/>
-  <EditText
-    android:id="@+id/addDeviceIncomeEditText"
-    android:text="1.0"
-    android:numeric="decimal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:autoText="true"/>
-
-
-  <Button 
-android:id="@+id/addDeviceButton"
-android:text="Добавить"
-    />
-  
-
-  
-  
-  
-  
-  
+    <TextView
+        android:id="@+id/addDeviceLabeText"
+        android:text=""
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+    <EditText
+        android:id="@+id/addDeviceMultEditText"
+        android:text="1.0"
+        android:numeric="decimal"
+        android:autoText="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+    <EditText
+        android:id="@+id/addDeviceIncomeEditText"
+        android:text="1.0"
+        android:numeric="decimal"
+        android:autoText="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listBeaconTypesLinearLayout">
+        <ListView
+            android:id="@+id/listBeaconTypes"
+            android:choiceMode="singleChoice"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/addDeviceButton"
+        android:text="Добавить"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 </LinearLayout>

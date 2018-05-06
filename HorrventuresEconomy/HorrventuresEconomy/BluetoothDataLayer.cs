@@ -26,7 +26,7 @@ namespace HorrventuresEconomy
 
         public BluetoothDataLayer()
         {
-            Console.WriteLine("Идгуещщер ВфефДфнукЫефкеув");
+
             timer = new Timer
             {
                 Interval = 15000
@@ -60,7 +60,10 @@ namespace HorrventuresEconomy
                 }
             };
         }
-
+        public void StopScan()
+        {
+            timer.Stop();
+        }
         private async void OnTimerTick(object sender, ElapsedEventArgs e)
         {
             if (!ble.Adapter.IsScanning)
@@ -69,6 +72,9 @@ namespace HorrventuresEconomy
             }
             ProcessDevices();
         }
+
+        
+
 
         public List<MyDeviceView> GetDeviceList()
         {

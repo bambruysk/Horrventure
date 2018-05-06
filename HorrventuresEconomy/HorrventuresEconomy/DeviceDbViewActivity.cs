@@ -10,40 +10,106 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Plugin.BLE;
 
 namespace HorrventuresEconomy
 {
     [Activity(Label = "DeviceDbViewActivity")]
-    public class DeviceDbViewActivity : ListActivity
+    public class DeviceDbViewActivity : Activity
     {
-        private BeaconDB beaconDB;
+
+
+        private int currentPosition;
+        private List<Beacon> deviceDB;
+        private ArrayAdapter arrayAdapter;
+        //private ListView listView;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.DeviceDBViewLayout);
 
 
 
-            beaconDB = new BeaconDB();
-            ObservableCollection<Beacon> deviceDB = new ObservableCollection<Beacon>();
-            foreach (var beac in beaconDB.Beacons_db)
+            deviceDB = new List<Beacon>();
+            ///TODO увесть в метод BeaconDB
+            foreach (var beac in BeaconDB.Beacons_db)
             {
                 deviceDB.Add(beac.Value);
             }
 
-            ListAdapter = new ArrayAdapter<Beacon>(this, Resource.Layout.DeviceDBViewLayout, Resource.Id.DevDBTextView, deviceDB);
+            ListView listView = FindViewById<ListView>(Resource.Id.DevDBViewlistView);
+            arrayAdapter = new ArrayAdapter (this,Android.Resource.Layout.SimpleListItem1, deviceDB);
+            listView.ItemClick += EditDevice;
             //Button findDeicebutton = FindViewById<Button>(Resource.Id.DevDBFindNewDevice);
+            listView.Adapter = arrayAdapter;
+            Button saveButton = FindViewById<Button>(Resource.Id.DevDVSaveButton);
+            Button addButton = FindViewById<Button>(Resource.Id.DevDBAddButton);
 
             //ListView.AddFooterView(findDeicebutton);
-           // findDeicebutton.Click += StartFindNewDevce;
-          
+            // findDeicebutton.Click += StartFindNewDevce;
+            
+            saveButton.Click += SaveButton_Click;
+            addButton.Click += AddButton_Click;
+            ((ArrayAdapter)arrayAdapter).SetNotifyOnChange(true);
         }
 
-        private void StartFindNewDevce(object sender, EventArgs e)
+        protected override void OnResume()
         {
+            base.OnResume();
+            BeaconDB.Upload();
+            foreach (var beac in BeaconDB.Beacons_db)
+            {
+                deviceDB.Add(beac.Value);
+            }
+            arrayAdapter.Clear();
+            arrayAdapter.AddAll(deviceDB);
+            ((BaseAdapter)arrayAdapter).NotifyDataSetChanged();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            var ble = CrossBluetoothLE.Current;
+            var ble_adapter = ble.Adapter;
+
             Intent intent = new Intent(this, typeof(FindNewDevice));
             StartActivity(intent);
         }
 
-        
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            BeaconDB.SaveDB(deviceDB);
+            //Toast.MakeText(this, "База данных маячков сохранена", ToastLength.Long); 
+
+        }
+
+        private void EditDevice(object sender, AdapterView.ItemClickEventArgs e)
+        {
+
+            Beacon beacon = deviceDB[e.Position];
+            Intent intent = new Intent(this, typeof( AddNewDeviceActivity));
+            intent.PutExtra("type", (int) beacon.beaconType);
+            intent.PutExtra("mult", (Double)beacon.Mulltiplier);
+            intent.PutExtra("income", (Double)beacon.IncomePerMinute);
+            intent.PutExtra("MAC", beacon.Id);
+            intent.PutExtra("Position", e.Position);
+            intent.PutExtra("Mode", "EDIT");
+            currentPosition = e.Position;
+            StartActivityForResult(intent, 200);
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == 200 && resultCode == Result.Ok)
+            {
+                Console.WriteLine("\nDEBOOUUU" + data.GetIntExtra("type", 2));
+                deviceDB[currentPosition].beaconType =  
+                    (Beacon.BeaconType) Enum.ToObject(typeof(Beacon.BeaconType), data.GetIntExtra("type", 2));
+                deviceDB[currentPosition].IncomePerMinute = (Double)data.GetDoubleExtra("income", 0);
+                deviceDB[currentPosition].Mulltiplier = (Double)data.GetDoubleExtra("mult", 0);
+                ((BaseAdapter)arrayAdapter).NotifyDataSetChanged();
+            }
+        }
     }
 }
