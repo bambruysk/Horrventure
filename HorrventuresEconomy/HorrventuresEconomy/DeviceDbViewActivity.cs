@@ -30,8 +30,8 @@ namespace HorrventuresEconomy
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DeviceDBViewLayout);
 
-
-
+            
+            BeaconDB.Initialize();
             deviceDB = new List<Beacon>();
             ///TODO увесть в метод BeaconDB
             foreach (var beac in BeaconDB.Beacons_db)
@@ -58,8 +58,10 @@ namespace HorrventuresEconomy
         protected override void OnResume()
         {
             base.OnResume();
+            BeaconDB.Initialize();
             BeaconDB.Upload();
             Console.WriteLine("Resumeactivitie!!" + this.ToString());
+            deviceDB.Clear();
             foreach (var beac in BeaconDB.Beacons_db)
             {
                 Console.WriteLine("Device Added " + beac.ToString());
@@ -119,7 +121,7 @@ namespace HorrventuresEconomy
             Intent intent = new Intent(this, typeof(AddNewDeviceActivity));
             intent.PutExtra("type", (int)beacon.beaconType);
             intent.PutExtra("mult", (Double)beacon.Mulltiplier);
-            intent.PutExtra("income", (Double)beacon.IncomePerMinute);
+            intent.PutExtra("income", (Double)beacon.IncomePerHour);
             intent.PutExtra("MAC", beacon.Id);
             intent.PutExtra("Position", e.Position);
             intent.PutExtra("Mode", "EDIT");
@@ -135,7 +137,7 @@ namespace HorrventuresEconomy
                 Console.WriteLine("\nDEBOOUUU" + data.GetIntExtra("type", 2));
                 deviceDB[currentPosition].beaconType =  
                     (Beacon.BeaconType) Enum.ToObject(typeof(Beacon.BeaconType), data.GetIntExtra("type", 2));
-                deviceDB[currentPosition].IncomePerMinute = (Double)data.GetDoubleExtra("income", 0);
+                deviceDB[currentPosition].IncomePerHour = (Double)data.GetDoubleExtra("income", 0);
                 deviceDB[currentPosition].Mulltiplier = (Double)data.GetDoubleExtra("mult", 0);
                 ((BaseAdapter)arrayAdapter).NotifyDataSetChanged();
             }

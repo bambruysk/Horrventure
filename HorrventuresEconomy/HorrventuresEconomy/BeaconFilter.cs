@@ -18,14 +18,13 @@ namespace HorrventuresEconomy
 {
     public class BeaconFilter
     {
-        
 
         private BluetoothDataLayer bluetooth;
 
         public BeaconFilter(BluetoothDataLayer bluetooth)
         {
             this.bluetooth = bluetooth;
-            
+            BeaconDB.Initialize();
 
         }
 

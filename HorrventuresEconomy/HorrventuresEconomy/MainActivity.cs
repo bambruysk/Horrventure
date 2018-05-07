@@ -16,14 +16,19 @@ namespace HorrventuresEconomy
         Timer timer;
         public TextView currency;
         public TextView cityState;
+        public TextView alchemy;
+        public TextView alchemyLevel;
         LinearLayout currencyLayout;
         EconomyLogic logic;
-
+        public TextView libraryLevel;
         public ImageView alchemyImage;
         public ImageView jewelryImage;
         public FrameLayout smithImage;
         public FrameLayout palaceImage;
         public ImageView libraryImage;
+        public TextView jewelryLevel;
+        public TextView smithLevel;
+        public TextView palaceLevel;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,16 +39,16 @@ namespace HorrventuresEconomy
             currency = FindViewById<TextView>(Resource.Id.currency);
             cityState = FindViewById<TextView>(Resource.Id.cityState);
 
-            var alchemy = FindViewById<TextView>(Resource.Id.alchemy);
-            var alchemyLevel = FindViewById<TextView>(Resource.Id.alchemyLevel);
+            alchemy = FindViewById<TextView>(Resource.Id.alchemy);
+            alchemyLevel = FindViewById<TextView>(Resource.Id.alchemyLevel);
             var jewelry = FindViewById<TextView>(Resource.Id.jewelry);
-            var jewelryLevel = FindViewById<TextView>(Resource.Id.jewelryLevel);
+            jewelryLevel = FindViewById<TextView>(Resource.Id.jewelryLevel);
             var smith = FindViewById<TextView>(Resource.Id.smith);
-            var smithLevel = FindViewById<TextView>(Resource.Id.smithLevel);
+            smithLevel = FindViewById<TextView>(Resource.Id.smithLevel);
             var palace = FindViewById<TextView>(Resource.Id.palace);
-            var palaceLevel = FindViewById<TextView>(Resource.Id.palaceLevel);
+            palaceLevel = FindViewById<TextView>(Resource.Id.palaceLevel);
             var library = FindViewById<TextView>(Resource.Id.library);
-            var libraryLevel = FindViewById<TextView>(Resource.Id.libraryLevel);
+            libraryLevel = FindViewById<TextView>(Resource.Id.libraryLevel);
 
             alchemyImage = FindViewById<ImageView>(Resource.Id.alchemyImage);
             jewelryImage = FindViewById<ImageView>(Resource.Id.jewelryImage);
@@ -116,6 +121,12 @@ namespace HorrventuresEconomy
             StartActivity(intent);
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            logic.Resume();
+        }
+
         public void SetImages()
         {
             alchemyImage.SetBackgroundColor(Color.White);
@@ -136,7 +147,17 @@ namespace HorrventuresEconomy
 
         private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
-            RunOnUiThread(() => currency.Text = "Монет в казне: " + logic.GetCurrency());
+            RunOnUiThread(() =>
+            {
+                currency.Text = "Монет в казне: " + logic.GetCurrency().ToString("F2");
+                alchemyLevel.Text = logic.AlchemyLevel.ToString();
+                jewelryLevel.Text = logic.JewelryLevel.ToString();
+                smithLevel.Text = logic.ForgeLevel.ToString();
+                palaceLevel.Text = logic.PalaceLevel.ToString();
+                libraryLevel.Text = logic.LibraryLevel.ToString();
+            }
+            );
+
         }
 
 

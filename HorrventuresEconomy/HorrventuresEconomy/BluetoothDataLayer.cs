@@ -74,7 +74,10 @@ namespace HorrventuresEconomy
             ProcessDevices();
         }
 
-        
+        public void ResumeScan()
+        {
+            timer.Start();
+        }
 
 
         public List<MyDeviceView> GetDeviceList()

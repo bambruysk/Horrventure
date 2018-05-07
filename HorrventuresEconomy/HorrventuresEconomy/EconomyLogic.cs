@@ -33,8 +33,8 @@ namespace HorrventuresEconomy
 
         private ISharedPreferences preferences;
         private ISharedPreferencesEditor prefEditor;
-        static private string CURRENCY_KEY = "currency"; 
-
+        static private string CURRENCY_KEY = "currency";
+        static public int CycleTimeMs = 1000;
 
         public EconomyLogic()
         {
@@ -42,22 +42,24 @@ namespace HorrventuresEconomy
             bleDataLayer = new BluetoothDataLayer();
             beaconFilter = new BeaconFilter(bleDataLayer);
             deviceList = new List<MyDeviceView>();
-                  
+
+
 
             timer = new Timer
             {
-                Interval = 10000
+                Interval = CycleTimeMs
             };
             timer.Elapsed += OnTimerTick;
             timer.Start();
             preferences = Application.Context.GetSharedPreferences("curr",0);
             prefEditor = preferences.Edit();
             Currency = preferences.GetFloat(CURRENCY_KEY, 0);
-            BeaconDB.Initialize();
+
         }
         private void putCurrencyToPrefs()
         {
             prefEditor.PutFloat(CURRENCY_KEY, (float) Currency);
+            prefEditor.Apply();
         }
         /// <summary>
         /// Запуск экономики. Сбрасывает все в ноль.
@@ -79,27 +81,30 @@ namespace HorrventuresEconomy
         public void Resume()
         {
             timer.Start();
+            bleDataLayer.ResumeScan();
         }
 
 
         private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
             UpdateCurrency();
+            UpdateCityState();
         }
 
         private void UpdateCityState()
         {
             double total_multiplier = 1;
-            double total_income = 0;
+            double total_income_per_hour = 0;
             ForgeLevel = 0;
             AlchemyLevel = 0;
             PalaceLevel = 1;
             JewelryLevel = 0;
+            LibraryLevel = 0;
             List<Beacon> beacons = beaconFilter.GetActiveBeeacons();
             foreach (Beacon  beacon in beacons)
             {
                 total_multiplier *= beacon.Mulltiplier;
-                total_income += beacon.IncomePerMinute;
+                total_income_per_hour += beacon.IncomePerHour;
                 switch (beacon.beaconType)
                 {
                     case Beacon.BeaconType.ALCHEMY :
@@ -121,8 +126,8 @@ namespace HorrventuresEconomy
                         break;
                 }
             }
-
-            currentIncome = total_income * total_multiplier;
+           
+            currentIncome = (total_income_per_hour/(3600f* 1000f))*CycleTimeMs * total_multiplier;
 
 
         }

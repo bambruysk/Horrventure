@@ -18,7 +18,7 @@ namespace HorrventuresEconomy
     {
         public string Id;
         public double Mulltiplier;
-        public double IncomePerMinute;
+        public double IncomePerHour;
 
         public BeaconType beaconType;
 
@@ -26,8 +26,18 @@ namespace HorrventuresEconomy
         {
             Id = id;
             Mulltiplier = mulltiplier;
-            IncomePerMinute = incomePerMinute;
+            IncomePerHour = incomePerMinute;
             beaconType = beacon_type;
+        }
+        public string GetShortId()
+        {
+            string id_short_str = Id;
+            if (Id.Length > 12)
+            {
+                id_short_str = Id.Substring(Id.Length - 12);
+               
+            }
+            return id_short_str;
         }
 
         public override string ToString()
@@ -57,7 +67,7 @@ namespace HorrventuresEconomy
                     BeaconTypeStr = "Нет типа";
                     break;
             }
-            return (String.Format("ID: {0}  Mult : {1} Income {2} Тип : {3}", Id, Mulltiplier,IncomePerMinute, BeaconTypeStr));
+            return (String.Format("ID: {0}  Mult : {1} Income {2} Тип : {3}", GetShortId(), Mulltiplier,IncomePerHour, BeaconTypeStr));
         }
 
         //beaconType { get => beaconType; set => beaconType = value; }

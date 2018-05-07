@@ -20,28 +20,29 @@ namespace HorrventuresEconomy
     {
         static public Dictionary<string, Beacon> Beacons_db;
         static public  string db_filename;
- 
+        static public bool Initialized = false;
         static public void  Initialize()
         {
-            db_filename = Path.Combine(Application.Context.FilesDir.Path, "BeaconList.xml");
-            Beacons_db = new Dictionary<string, Beacon>();
-            if (File.Exists(path: db_filename)) 
+            if (!Initialized)
             {
+                db_filename = Path.Combine(Application.Context.FilesDir.Path, "BeaconList.xml");
+                Beacons_db = new Dictionary<string, Beacon>();
                 Upload();
+                Initialized = true;
             }
-
-
         }
 
         static public void Upload()
         {
-
-            using (Stream reader = new FileStream(db_filename, FileMode.Open))
+            if (File.Exists(path: db_filename))
             {
-                BinaryFormatter serializer = new BinaryFormatter();
-                
-                Beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
-                reader.Close();
+                using (Stream reader = new FileStream(db_filename, FileMode.Open))
+                {
+                    BinaryFormatter serializer = new BinaryFormatter();
+
+                    Beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
+                    reader.Close();
+                }
             }
   
         }
