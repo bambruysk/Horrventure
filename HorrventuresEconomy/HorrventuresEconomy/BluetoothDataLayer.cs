@@ -14,6 +14,7 @@ using Plugin.BLE.Abstractions.Contracts;
 
 namespace HorrventuresEconomy
 {
+    // TODO change to static or singletone
     public class BluetoothDataLayer
     {
         private Timer timer;

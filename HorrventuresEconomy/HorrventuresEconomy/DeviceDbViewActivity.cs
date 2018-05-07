@@ -21,6 +21,7 @@ namespace HorrventuresEconomy
 
         private int currentPosition;
         private List<Beacon> deviceDB;
+        private ListView listView;
         private ArrayAdapter arrayAdapter;
         //private ListView listView;
 
@@ -38,7 +39,7 @@ namespace HorrventuresEconomy
                 deviceDB.Add(beac.Value);
             }
 
-            ListView listView = FindViewById<ListView>(Resource.Id.DevDBViewlistView);
+            listView = FindViewById<ListView>(Resource.Id.DevDBViewlistView);
             arrayAdapter = new ArrayAdapter (this,Android.Resource.Layout.SimpleListItem1, deviceDB);
             listView.ItemClick += EditDevice;
             //Button findDeicebutton = FindViewById<Button>(Resource.Id.DevDBFindNewDevice);
@@ -58,8 +59,10 @@ namespace HorrventuresEconomy
         {
             base.OnResume();
             BeaconDB.Upload();
+            Console.WriteLine("Resumeactivitie!!" + this.ToString());
             foreach (var beac in BeaconDB.Beacons_db)
             {
+                Console.WriteLine("Device Added " + beac.ToString());
                 deviceDB.Add(beac.Value);
             }
             arrayAdapter.Clear();
@@ -85,10 +88,36 @@ namespace HorrventuresEconomy
 
         private void EditDevice(object sender, AdapterView.ItemClickEventArgs e)
         {
-
             Beacon beacon = deviceDB[e.Position];
-            Intent intent = new Intent(this, typeof( AddNewDeviceActivity));
-            intent.PutExtra("type", (int) beacon.beaconType);
+            var alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Что сделать с устройством?")
+            .SetCancelable(true)
+            .SetPositiveButton("Редактировать", (senderAlert, args) =>
+               {
+                   StartEditDevice(e, beacon);
+               })
+               .SetNeutralButton("Удалить", (senderAlert, args) =>
+               {
+                   deviceDB.RemoveAt(e.Position);
+                   BeaconDB.SaveDB(deviceDB);
+                   ((BaseAdapter)arrayAdapter).NotifyDataSetChanged();
+                   arrayAdapter.Clear();
+                   arrayAdapter.AddAll(deviceDB);
+
+               })
+               .SetNegativeButton("Отмена", (senderAlert, args) =>
+              {
+    
+              });
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+        }
+
+        private void StartEditDevice(AdapterView.ItemClickEventArgs e, Beacon beacon)
+        {
+            Intent intent = new Intent(this, typeof(AddNewDeviceActivity));
+            intent.PutExtra("type", (int)beacon.beaconType);
             intent.PutExtra("mult", (Double)beacon.Mulltiplier);
             intent.PutExtra("income", (Double)beacon.IncomePerMinute);
             intent.PutExtra("MAC", beacon.Id);

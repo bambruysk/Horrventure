@@ -25,13 +25,19 @@ namespace HorrventuresEconomy
         {
             this.Device = device;
         }
-
+        public string GetShortName()
+        {
+            string id_str = Device.Id.ToString();
+            string id_chort_str = id_str.Substring(id_str.Length - 12);
+            return id_chort_str;
+        }
 
         public override string ToString()
         {
             string id_str = Device.Id.ToString();
-            string id_chort_str = id_str.Substring(id_str.Length - 12);
+            string id_short_str = GetShortName();
             string name_str;
+            string in_base_flag;
             if (this.Device.Name != null)
             {
                 name_str = Device.Name.ToString();
@@ -40,7 +46,11 @@ namespace HorrventuresEconomy
             {
                 name_str = "n/a";
             }
-            return (id_chort_str + "   " + name_str);
+            if (BeaconDB.Contains(Device)){
+                in_base_flag = BeaconDB.Get(id_str).ToString();
+                return ("IB: " + in_base_flag);
+            }
+            return (id_short_str + "   " + name_str);
         }
     }
 

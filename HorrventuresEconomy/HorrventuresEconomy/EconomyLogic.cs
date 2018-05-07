@@ -31,7 +31,9 @@ namespace HorrventuresEconomy
         public int JewelryLevel;
         public int LibraryLevel;
 
-
+        private ISharedPreferences preferences;
+        private ISharedPreferencesEditor prefEditor;
+        static private string CURRENCY_KEY = "currency"; 
 
 
         public EconomyLogic()
@@ -40,7 +42,7 @@ namespace HorrventuresEconomy
             bleDataLayer = new BluetoothDataLayer();
             beaconFilter = new BeaconFilter(bleDataLayer);
             deviceList = new List<MyDeviceView>();
-            
+                  
 
             timer = new Timer
             {
@@ -48,6 +50,14 @@ namespace HorrventuresEconomy
             };
             timer.Elapsed += OnTimerTick;
             timer.Start();
+            preferences = Application.Context.GetSharedPreferences("curr",0);
+            prefEditor = preferences.Edit();
+            Currency = preferences.GetFloat(CURRENCY_KEY, 0);
+            BeaconDB.Initialize();
+        }
+        private void putCurrencyToPrefs()
+        {
+            prefEditor.PutFloat(CURRENCY_KEY, (float) Currency);
         }
         /// <summary>
         /// Запуск экономики. Сбрасывает все в ноль.
@@ -121,6 +131,7 @@ namespace HorrventuresEconomy
         {
             ///deviceList = deviceData.GetDeviceList();
             Currency += currentIncome;
+            putCurrencyToPrefs();
         }
 
 
@@ -155,6 +166,7 @@ namespace HorrventuresEconomy
         public void RefreshCurrency()
         {
             Currency = 0;
+            putCurrencyToPrefs();
         }
 
         public bool RetrieveMoney(int amount)
@@ -162,6 +174,7 @@ namespace HorrventuresEconomy
             if (amount < Currency)
             {
                 Currency -= amount;
+                putCurrencyToPrefs();
                 return true;
             }
             return false;

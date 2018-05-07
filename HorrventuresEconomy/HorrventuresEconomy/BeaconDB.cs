@@ -16,105 +16,95 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace HorrventuresEconomy
 {
-    
     static public class BeaconDB
     {
-        
-        static private Dictionary<string, Beacon> beacons_db;
-        static public  string db_filename = "BeaconList.xml";
-
-        static private BinaryFormatter serializer;
-
-
-       static public Dictionary<string, Beacon> Beacons_db { get => beacons_db; }
-
-        static   BeaconDB()
+        static public Dictionary<string, Beacon> Beacons_db;
+        static public  string db_filename;
+ 
+        static public void  Initialize()
         {
-            string fileDir = Application.Context.FilesDir.Path;
-            db_filename = Path.Combine(fileDir, db_filename);
-            serializer = new BinaryFormatter();
-            beacons_db = new Dictionary<string, Beacon>();
-            if (File.Exists(path: db_filename))
+            db_filename = Path.Combine(Application.Context.FilesDir.Path, "BeaconList.xml");
+            Beacons_db = new Dictionary<string, Beacon>();
+            if (File.Exists(path: db_filename)) 
             {
                 Upload();
             }
-            else
-            {
-                using (FileStream fs = File.Create(db_filename, 1, FileOptions.RandomAccess))
-                {
-                    fs.Close();
-                }
-                
-            }
+
+
         }
 
-
-
-        static public Dictionary<string, Beacon> Upload()
+        static public void Upload()
         {
-            beacons_db = new Dictionary<string, Beacon>();
+
             using (Stream reader = new FileStream(db_filename, FileMode.Open))
             {
-                if (reader.IsDataAvailable())
-                    beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
+                BinaryFormatter serializer = new BinaryFormatter();
+                
+                Beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
                 reader.Close();
             }
-            return beacons_db;
+  
         }
 
         static public void SaveDB()
         {
-            using (Stream writer = new FileStream(db_filename, FileMode.Open))
+
+            using (Stream writer = new FileStream(db_filename, FileMode.OpenOrCreate,FileAccess.Write))
             {
-                serializer.Serialize(writer, beacons_db);
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(writer, Beacons_db);
                 writer.Close();
             }
         }
 
         static public void SaveDB(List<Beacon> new_beacons)
         {
-            beacons_db.Clear();
+            Beacons_db.Clear();
             foreach (var b in new_beacons)
             {
-                beacons_db.Add(b.Id, b);
+                Beacons_db.TryAdd(b.Id, b);
             }
             SaveDB();
         }
 
-        static public void RegisterNewBeacon(Beacon beacon)
+        static public bool RegisterNewBeacon(Beacon beacon)
         {
-            beacons_db.Add(beacon.Id, beacon);
+            var result = Beacons_db.TryAdd(beacon.Id, beacon);
             SaveDB();
+            return result;
         }
 
-        static public void RegisterNewBeacon (MyDeviceView device, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
+        static public bool RegisterNewBeacon (MyDeviceView device, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
         {
-            beacons_db.Add(device.id.ToString(), new Beacon(device.id.ToString(), mulltiplier, incomePerMinute, beaconType));
+            var result = Beacons_db.TryAdd(device.id.ToString(), new Beacon(device.id.ToString(), mulltiplier, incomePerMinute, beaconType));
             SaveDB();
+            return result;
         }
 
-        static public void RegisterNewBeacon(string id, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
+        static public bool RegisterNewBeacon(string id, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
         {
-            beacons_db.Add(id, new Beacon(id, mulltiplier, incomePerMinute, beaconType));
+            Console.WriteLine("In Register New Beacon");
+            var result = Beacons_db.TryAdd(id, new Beacon(id, mulltiplier, incomePerMinute, beaconType));
             SaveDB();
+            return result;
         }
 
         static public bool Contains (Beacon beacon )
         {
-            return beacons_db.ContainsKey(beacon.Id);
+            return Beacons_db.ContainsKey(beacon.Id);
         }
         static public bool Contains (IDevice device)
         {
-            return beacons_db.ContainsKey(device.Id.ToString());
+            return Beacons_db.ContainsKey(device.Id.ToString());
         }
 
         static public bool Contains(string id)
         {
-            return beacons_db.ContainsKey(id);
+            return Beacons_db.ContainsKey(id);
         }
         static public Beacon Get (string id)
         {
-            return beacons_db[id];
+            return Beacons_db[id];
         }
     }
 }
