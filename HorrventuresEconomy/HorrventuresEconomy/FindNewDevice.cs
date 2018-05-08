@@ -138,8 +138,8 @@ namespace HorrventuresEconomy
         {
             var found_dev = new MyBleDevice((Device)e.Device);
             Console.WriteLine("Finder found!");
-            //TODO: Удалить
-            Toast.MakeText(this, "новое устройство" + e.Device.Id.ToString(), ToastLength.Long).Show();
+
+          
             deviceList.Add(found_dev);
             devListAdapter.Add(found_dev.ToString());
             

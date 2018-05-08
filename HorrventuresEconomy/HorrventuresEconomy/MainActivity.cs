@@ -29,6 +29,7 @@ namespace HorrventuresEconomy
         public TextView jewelryLevel;
         public TextView smithLevel;
         public TextView palaceLevel;
+        static private bool REQ_PASS_FOR_ADMIN_PANEL = true;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -108,6 +109,7 @@ namespace HorrventuresEconomy
             //Intent intent = new Intent(this, typeof(AdminPanelActivity));
             //hareMenuItem.SetIntent(intent);
 
+
             Button itemButton = (Button)shareMenuItem.ActionView;
             itemButton.Click += StartAdminPanel;
 
@@ -116,8 +118,22 @@ namespace HorrventuresEconomy
 
         private void StartAdminPanel(object sender, EventArgs e)
         {
+            if (REQ_PASS_FOR_ADMIN_PANEL)
+            {
+                RequestPassword request = new RequestPassword(this,
+                    new RequestPassword.RequestAction(StartAdminActy));
+                request.GetPassword(RequestPassword.SecurityLevel.ADMIN);
+            }
+            else
+            {
+                StartAdminActy(this);
+            }
+        }
+
+        private void StartAdminActy(Context context)
+        {
             logic.Pause();
-            Intent intent = new Intent(this, typeof(AdminPanelActivity));
+            Intent intent = new Intent(context, typeof(AdminPanelActivity));
             StartActivity(intent);
         }
 
@@ -159,9 +175,6 @@ namespace HorrventuresEconomy
             );
 
         }
-
-
-
 
         private void OnGetMoney(object sender, EventArgs e)
         {

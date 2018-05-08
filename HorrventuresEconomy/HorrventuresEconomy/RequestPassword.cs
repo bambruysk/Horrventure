@@ -63,8 +63,8 @@ namespace HorrventuresEconomy
 
                 if (checkPasswordResult)
                 {
-                    if (Action == null)
-                        Action(myContext);
+                    if (Action != null)
+                        Action.Invoke(myContext);
                 }
                 else
                 {
