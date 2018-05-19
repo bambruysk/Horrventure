@@ -23,7 +23,7 @@ namespace HorrventuresEconomy
 
         private int positionFromParent;
 
-        public Beacon.BeaconType beaconType;
+        public HVBeacon.BeaconType beaconType;
         private ListView ListBeaconTypes;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,7 +36,7 @@ namespace HorrventuresEconomy
             name.Text = Intent.GetStringExtra("MAC");
 
             List<string> beaconTypes = new List<string>();
-            foreach (Beacon.BeaconType b in Enum.GetValues(typeof(Beacon.BeaconType)))
+            foreach (HVBeacon.BeaconType b in Enum.GetValues(typeof(HVBeacon.BeaconType)))
             {
                 Console.WriteLine("Test type " + b.ToString());
                 beaconTypes.Add(b.ToString());

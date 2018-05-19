@@ -29,9 +29,9 @@ namespace HorrventuresEconomy
 
         }
 
-        public List<Beacon> GetActiveBeeacons()
+        public List<HVBeacon> GetActiveBeeacons()
         {
-            List<Beacon> beacons = new List<Beacon>();
+            List<HVBeacon> beacons = new List<HVBeacon>();
 
             List<MyDeviceView> devlist =  bluetooth.GetDeviceList();
             BeaconDB.Upload();

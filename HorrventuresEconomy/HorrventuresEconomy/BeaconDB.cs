@@ -20,20 +20,20 @@ namespace HorrventuresEconomy
     static public class BeaconDB
     {
         
-        static private Dictionary<string, Beacon> beacons_db;
+        static private Dictionary<string, HVBeacon> beacons_db;
         static public  string db_filename = "BeaconList.xml";
 
         static private BinaryFormatter serializer;
 
 
-       static public Dictionary<string, Beacon> Beacons_db { get => beacons_db; }
+       static public Dictionary<string, HVBeacon> Beacons_db { get => beacons_db; }
 
         static   BeaconDB()
         {
             string fileDir = Application.Context.FilesDir.Path;
             db_filename = Path.Combine(fileDir, db_filename);
             serializer = new BinaryFormatter();
-            beacons_db = new Dictionary<string, Beacon>();
+            beacons_db = new Dictionary<string, HVBeacon>();
             if (File.Exists(path: db_filename))
             {
                 Upload();
@@ -50,13 +50,13 @@ namespace HorrventuresEconomy
 
 
 
-        static public Dictionary<string, Beacon> Upload()
+        static public Dictionary<string, HVBeacon> Upload()
         {
-            beacons_db = new Dictionary<string, Beacon>();
+            beacons_db = new Dictionary<string, HVBeacon>();
             using (Stream reader = new FileStream(db_filename, FileMode.Open))
             {
                 if (reader.IsDataAvailable())
-                    beacons_db = (Dictionary<string, Beacon>)serializer.Deserialize(reader);
+                    beacons_db = (Dictionary<string, HVBeacon>)serializer.Deserialize(reader);
                 reader.Close();
             }
             return beacons_db;
@@ -71,7 +71,7 @@ namespace HorrventuresEconomy
             }
         }
 
-        static public void SaveDB(List<Beacon> new_beacons)
+        static public void SaveDB(List<HVBeacon> new_beacons)
         {
             beacons_db.Clear();
             foreach (var b in new_beacons)
@@ -81,25 +81,25 @@ namespace HorrventuresEconomy
             SaveDB();
         }
 
-        static public void RegisterNewBeacon(Beacon beacon)
+        static public void RegisterNewBeacon(HVBeacon beacon)
         {
             beacons_db.Add(beacon.Id, beacon);
             SaveDB();
         }
 
-        static public void RegisterNewBeacon (MyDeviceView device, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
+        static public void RegisterNewBeacon (MyDeviceView device, double mulltiplier, double incomePerMinute, HVBeacon.BeaconType beaconType)
         {
-            beacons_db.Add(device.id.ToString(), new Beacon(device.id.ToString(), mulltiplier, incomePerMinute, beaconType));
+            beacons_db.Add(device.id.ToString(), new HVBeacon(device.id.ToString(), mulltiplier, incomePerMinute, beaconType));
             SaveDB();
         }
 
-        static public void RegisterNewBeacon(string id, double mulltiplier, double incomePerMinute, Beacon.BeaconType beaconType)
+        static public void RegisterNewBeacon(string id, double mulltiplier, double incomePerMinute, HVBeacon.BeaconType beaconType)
         {
-            beacons_db.Add(id, new Beacon(id, mulltiplier, incomePerMinute, beaconType));
+            beacons_db.Add(id, new HVBeacon(id, mulltiplier, incomePerMinute, beaconType));
             SaveDB();
         }
 
-        static public bool Contains (Beacon beacon )
+        static public bool Contains (HVBeacon beacon )
         {
             return beacons_db.ContainsKey(beacon.Id);
         }
@@ -112,7 +112,7 @@ namespace HorrventuresEconomy
         {
             return beacons_db.ContainsKey(id);
         }
-        static public Beacon Get (string id)
+        static public HVBeacon Get (string id)
         {
             return beacons_db[id];
         }

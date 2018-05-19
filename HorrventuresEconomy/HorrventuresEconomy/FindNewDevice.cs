@@ -116,7 +116,7 @@ namespace HorrventuresEconomy
                 BeaconDB.RegisterNewBeacon(selectedBleDevice.Device.Id.ToString(),
                     data.GetDoubleExtra("mult", 1.0),
                     data.GetDoubleExtra("income", 0),
-                    (Beacon.BeaconType)data.GetIntExtra("type", 0));
+                    (HVBeacon.BeaconType)data.GetIntExtra("type", 0));
             }
         }
 

@@ -85,26 +85,26 @@ namespace HorrventuresEconomy
             AlchemyLevel = 0;
             PalaceLevel = 1;
             JewelryLevel = 0;
-            List<Beacon> beacons = beaconFilter.GetActiveBeeacons();
-            foreach (Beacon  beacon in beacons)
+            List<HVBeacon> beacons = beaconFilter.GetActiveBeeacons();
+            foreach (HVBeacon  beacon in beacons)
             {
                 total_multiplier *= beacon.Mulltiplier;
                 total_income += beacon.IncomePerMinute;
                 switch (beacon.beaconType)
                 {
-                    case Beacon.BeaconType.ALCHEMY :
+                    case HVBeacon.BeaconType.ALCHEMY :
                         AlchemyLevel++;
                         break;
-                    case Beacon.BeaconType.FORGE:
+                    case HVBeacon.BeaconType.FORGE:
                         ForgeLevel++;
                         break;
-                    case Beacon.BeaconType.JEWELRY:
+                    case HVBeacon.BeaconType.JEWELRY:
                         JewelryLevel++;
                         break;
-                    case Beacon.BeaconType.PALACE:
+                    case HVBeacon.BeaconType.PALACE:
                         PalaceLevel++;
                         break;
-                    case Beacon.BeaconType.LIBRAY:
+                    case HVBeacon.BeaconType.LIBRAY:
                         LibraryLevel++;
                         break;
                     default:

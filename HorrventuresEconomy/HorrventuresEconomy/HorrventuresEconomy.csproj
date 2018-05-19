@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="AccessManager.cs" />
     <Compile Include="AddNewDeviceActivity.cs" />
+    <Compile Include="BaseBeacon.cs" />
     <Compile Include="BeaconDB.cs" />
     <Compile Include="DeviceDbViewActivity.cs" />
     <Compile Include="FindNewDevice.cs" />
@@ -87,6 +88,8 @@
     <Compile Include="ScannedDeviceAdapter.cs" />
     <Compile Include="ScannedDeviceView.cs" />
     <Compile Include="SecurityLevel.cs" />
+    <Compile Include="SletBeacon.cs" />
+    <Compile Include="SletBeacon.Owner.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\FindDevicesLayout.axml">

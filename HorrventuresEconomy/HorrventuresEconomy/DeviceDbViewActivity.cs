@@ -20,7 +20,7 @@ namespace HorrventuresEconomy
 
 
         private int currentPosition;
-        private List<Beacon> deviceDB;
+        private List<HVBeacon> deviceDB;
         private ArrayAdapter arrayAdapter;
         //private ListView listView;
 
@@ -31,7 +31,7 @@ namespace HorrventuresEconomy
 
 
 
-            deviceDB = new List<Beacon>();
+            deviceDB = new List<HVBeacon>();
             ///TODO увесть в метод BeaconDB
             foreach (var beac in BeaconDB.Beacons_db)
             {
@@ -86,7 +86,7 @@ namespace HorrventuresEconomy
         private void EditDevice(object sender, AdapterView.ItemClickEventArgs e)
         {
 
-            Beacon beacon = deviceDB[e.Position];
+            HVBeacon beacon = deviceDB[e.Position];
             Intent intent = new Intent(this, typeof( AddNewDeviceActivity));
             intent.PutExtra("type", (int) beacon.beaconType);
             intent.PutExtra("mult", (Double)beacon.Mulltiplier);
@@ -105,7 +105,7 @@ namespace HorrventuresEconomy
             {
                 Console.WriteLine("\nDEBOOUUU" + data.GetIntExtra("type", 2));
                 deviceDB[currentPosition].beaconType =  
-                    (Beacon.BeaconType) Enum.ToObject(typeof(Beacon.BeaconType), data.GetIntExtra("type", 2));
+                    (HVBeacon.BeaconType) Enum.ToObject(typeof(HVBeacon.BeaconType), data.GetIntExtra("type", 2));
                 deviceDB[currentPosition].IncomePerMinute = (Double)data.GetDoubleExtra("income", 0);
                 deviceDB[currentPosition].Mulltiplier = (Double)data.GetDoubleExtra("mult", 0);
                 ((BaseAdapter)arrayAdapter).NotifyDataSetChanged();
