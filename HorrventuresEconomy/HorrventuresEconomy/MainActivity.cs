@@ -8,6 +8,7 @@ using Android.Graphics;
 using Android.Views;
 using static Android.Widget.ActionMenuView;
 
+
 namespace HorrventuresEconomy
 {
     [Activity(Label = "HorrventuresEconomy", MainLauncher = true, Icon = "@mipmap/icon")]
@@ -36,7 +37,7 @@ namespace HorrventuresEconomy
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Main);
-
+            BeaconDB.Initialize();
             currency = FindViewById<TextView>(Resource.Id.currency);
             cityState = FindViewById<TextView>(Resource.Id.cityState);
 
@@ -173,6 +174,7 @@ namespace HorrventuresEconomy
                 libraryLevel.Text = logic.LibraryLevel.ToString();
             }
             );
+
 
         }
 

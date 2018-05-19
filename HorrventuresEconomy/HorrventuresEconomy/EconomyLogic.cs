@@ -31,6 +31,8 @@ namespace HorrventuresEconomy
         public int JewelryLevel;
         public int LibraryLevel;
 
+        public bool isRunning;
+
         private ISharedPreferences preferences;
         private ISharedPreferencesEditor prefEditor;
         static private string CURRENCY_KEY = "currency";
@@ -51,6 +53,7 @@ namespace HorrventuresEconomy
             };
             timer.Elapsed += OnTimerTick;
             timer.Start();
+            isRunning = true;
             preferences = Application.Context.GetSharedPreferences("curr",0);
             prefEditor = preferences.Edit();
             Currency = preferences.GetFloat(CURRENCY_KEY, 0);
@@ -68,13 +71,14 @@ namespace HorrventuresEconomy
         {
             timer.Start();
             RefreshCurrency();
-
+            isRunning = true;
 
         }
         public void Pause()
         {
             timer.Stop();
             bleDataLayer.StopScan();
+            isRunning = false;
 
         }
 
@@ -82,13 +86,15 @@ namespace HorrventuresEconomy
         {
             timer.Start();
             bleDataLayer.ResumeScan();
+            isRunning = true;
         }
 
 
         private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
-            UpdateCurrency();
+            
             UpdateCityState();
+            UpdateCurrency();
         }
 
         private void UpdateCityState()
@@ -126,9 +132,12 @@ namespace HorrventuresEconomy
                         break;
                 }
             }
-           
-            currentIncome = (total_income_per_hour/(3600f* 1000f))*CycleTimeMs * total_multiplier;
+            double total_income_per_sec = total_income_per_hour /3600f;
+            double CycleTimeS = CycleTimeMs / 1000f;
+            currentIncome = total_income_per_sec *CycleTimeS * total_multiplier;
 
+            // Учтем что игра идет 24 часа, а не 12. 
+            currentIncome = currentIncome / 2;
 
         }
 
@@ -143,7 +152,7 @@ namespace HorrventuresEconomy
 
 
         public double GetCurrency() => Currency;
-
+/*
         public int GetIncomeRate()
         {
             if (deviceList.Count > 10)
@@ -167,7 +176,7 @@ namespace HorrventuresEconomy
                 return 1;
             }
         }
-
+*/
         public void RefreshCurrency()
         {
             Currency = 0;

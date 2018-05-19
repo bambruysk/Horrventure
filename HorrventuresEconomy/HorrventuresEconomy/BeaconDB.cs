@@ -25,7 +25,11 @@ namespace HorrventuresEconomy
         {
             if (!Initialized)
             {
-                db_filename = Path.Combine(Application.Context.FilesDir.Path, "BeaconList.xml");
+                Java.IO.File download_folder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads);
+                //               db_filename = Path.Combine(Application.Context.FilesDir.Path, "BeaconList.xml");
+                Java.IO.File db_file = new Java.IO.File(download_folder, "BeaconList.xml");
+                db_filename = db_file.Path;
+
                 Beacons_db = new Dictionary<string, Beacon>();
                 Upload();
                 Initialized = true;
